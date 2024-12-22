@@ -1,5 +1,5 @@
 CREATE TABLE Usuario (
-    id INTEGER PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR (60),
     data_nascimento DATETIME,
     telefone VARCHAR (11),
@@ -9,58 +9,58 @@ CREATE TABLE Usuario (
     foto_perfil VARCHAR(255)
 );
 CREATE TABLE Mentor (
-    id INTEGER PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
     biografia VARCHAR(255),
-    preco DECIMAL(7,2),
+    preco DECIMAL(7, 2),
     tags VARCHAR(255),
     curriculo VARCHAR(2000),
     minutos_por_chamada INTEGER,
     qte_chamadas INTEGER,
-    avaliacao DECIMAL(2,1),
+    avaliacao DECIMAL(2, 1),
     fk_Cargo_id INTEGER,
     fk_Empresa_id INTEGER,
     fk_Usuario_id INTEGER
 );
 CREATE TABLE Cargo (
     nome VARCHAR(60),
-    id INTEGER PRIMARY KEY
+    id INTEGER PRIMARY KEY AUTO_INCREMENT
 );
 CREATE TABLE Empresa (
-    id INTEGER PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(60)
 );
 CREATE TABLE Habilidade (
     nome VARCHAR(60),
-    certificado VARCHAR(255),
-    id INTEGER PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
     fk_Area_id INTEGER
 );
 CREATE TABLE Area (
-    id INTEGER PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(60)
 );
 CREATE TABLE Mentoria (
-    id INTEGER PRIMARY KEY,
-    valor DECIMAL(9,2),
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    valor DECIMAL(9, 2),
     quantidade_sessoes INTEGER,
     expectativa VARCHAR(255),
     data_hora_inicio DATETIME,
     data_hora_fim DATETIME,
     ativa BOOLEAN,
-    avaliacao DECIMAL(2,1),
+    avaliacao DECIMAL(2, 1),
     fk_Mentor_id INTEGER,
     fk_Usuario_id INTEGER
 );
 CREATE TABLE Sessao_Mentoria (
-    id INTEGER PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
     data_hora_inicio DATETIME,
     data_hora_fim DATETIME,
-    avaliacao DECIMAL(2,1),
+    avaliacao DECIMAL(2, 1),
     fk_Mentoria_id INTEGER
 );
 CREATE TABLE Mentor_Habilidade (
     fk_Habilidade_id INTEGER,
-    fk_Mentor_id INTEGER
+    fk_Mentor_id INTEGER,
+    certificado VARCHAR(255)
 );
 ALTER TABLE Mentor
 ADD CONSTRAINT FK_Mentor_Cargo FOREIGN KEY (fk_Cargo_id) REFERENCES Cargo (id) ON DELETE
