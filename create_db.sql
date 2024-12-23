@@ -58,6 +58,7 @@ CREATE TABLE Sessao_Mentoria (
     fk_Mentoria_id INTEGER
 );
 CREATE TABLE Mentor_Habilidade (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
     fk_Habilidade_id INTEGER,
     fk_Mentor_id INTEGER,
     certificado VARCHAR(255)
