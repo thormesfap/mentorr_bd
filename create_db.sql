@@ -85,3 +85,31 @@ SET NULL;
 ALTER TABLE Mentor_Habilidade
 ADD CONSTRAINT FK_Mentor_Habilidade_Mentor FOREIGN KEY (fk_Mentor_id) REFERENCES Mentor (id) ON DELETE
 SET NULL;
+
+DELIMITER //
+CREATE TRIGGER avaliacao_mentor
+AFTER UPDATE ON Mentoria 
+FOR EACH ROW 
+BEGIN
+UPDATE Mentor
+SET avaliacao = (
+        SELECT AVG(avaliacao)
+        FROM Mentoria me
+        WHERE me.fk_Mentor_id = NEW.fk_Mentor_id
+    )
+WHERE Mentor.id = NEW.fk_Mentor_id;
+END //
+
+CREATE TRIGGER avaliacao_mentoria
+AFTER UPDATE ON Sessao_Mentoria 
+FOR EACH ROW 
+BEGIN
+UPDATE Mentoria
+SET avaliacao = (
+        SELECT AVG(avaliacao)
+        FROM Sessao_Mentoria sm
+        WHERE sm.fk_Mentoria_id = NEW.fk_Mentoria_id
+    )
+WHERE Mentoria.id = NEW.fk_Mentoria_id;
+END //
+DELIMITER ;
